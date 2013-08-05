@@ -34,10 +34,7 @@ class ScrapeWorkflow
     scrape_future = activity.send_async(:scrape, asin) if asin
     # wait_for_all(scrape_future)
   end
-
 end
 
-
 worker = AWS::Flow::WorkflowWorker.new($swf.client, $domain, $workflow_task_list, ScrapeWorkflow)
-
 worker.start if __FILE__ == $0
