@@ -1,0 +1,4 @@
+#!/bin/bash
+ruby hello_activity.rb &
+ruby hello_workflow.rb &
+ruby hello_world.rb
