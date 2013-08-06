@@ -27,6 +27,10 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.10)
+    aws-flow (1.0.0)
+      aws-flow-core (~> 1)
+      aws-sdk (~> 1)
+    aws-flow-core (1.0.0)
     aws-sdk (1.14.1)
       json (~> 1.4)
       nokogiri (< 1.6.0)
@@ -115,6 +119,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-flow
+  aws-flow-core
   aws-sdk
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)

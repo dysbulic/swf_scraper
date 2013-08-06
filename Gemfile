@@ -45,3 +45,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'aws-sdk'
+gem 'aws-flow'
+gem 'aws-flow-core'
