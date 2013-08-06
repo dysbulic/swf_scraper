@@ -29,10 +29,32 @@ class ScrapeActivity
 
 
   def scrape(asin)
-    puts "Scraping: #{asin}"
+    puts "Scraping: #{asin}"    
+
+    begin
+      url = "http://www.amazon.com/dp/" + asin
+      response = HTTParty.get(URI.encode(url))
+      doc = Nokogiri::HTML(response)
+
+      price_div = doc.at_css('.priceLarge')
+      price = (price_div.nil? or price_div.text[/[0-9\.,]+/].nil?) ? nil : price_div.text[/[0-9\.,]+/].gsub(/,/, '').to_f
+      
+      unless price
+        price_div = doc.at_css('.a-color-price.a-size-large')
+        price = (price_div.nil? or price_div.text[/[0-9\.,]+/].nil?) ? nil : price_div.text[/[0-9\.,]+/].gsub(/,/, '').to_f
+      end
+
+      if price
+        product = Product.find_by_asin(asin)
+        product.records.create( price: price )
+      end
+
+      puts "Scraped: #{asin}: #{price}"
+    rescue => e
+      puts "Error: #{e.message}"
+    end
   end
 end
-
 
 activity_worker = AWS::Flow::ActivityWorker.new($swf.client, $domain, $activity_task_list, ScrapeActivity) { {:use_forking => false} }
 activity_worker.start if __FILE__ == $0

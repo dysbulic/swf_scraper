@@ -47,3 +47,6 @@ end
 gem 'aws-sdk'
 gem 'aws-flow'
 gem 'aws-flow-core'
+
+gem 'httparty'
+gem 'nokogiri'
