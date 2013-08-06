@@ -5,5 +5,12 @@
   <%= @product.asin %>
 </p>
 
+<table>
+<tr><th>Date</th><th>Price</th></tr>
+<%- @product.records.each do |record| %>
+  <tr><td><%= record.created_at %></td><td><%= number_to_currency record.price %></td></tr>
+<%- end %>
+</table>
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
