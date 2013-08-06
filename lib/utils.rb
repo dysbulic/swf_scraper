@@ -16,7 +16,11 @@
 require 'aws/decider'
 
 $SCRAPE_DOMAIN = "Scrape"
-config_file = File.open('../config/aws.yml') { |f| f.read }
+if Rails.root
+  config_file = File.open("#{Rails.root}/config/aws.yml") { |f| f.read }
+else
+  config_file = File.open("../config/aws.yml") { |f| f.read }
+end
 AWS.config(YAML.load(config_file))
 
 @swf = AWS::SimpleWorkflow.new
