@@ -25,9 +25,11 @@ class ScrapeActivity
     }
   end
 
-
   def scrape(asin)
     begin
+      @count = 0 unless @count
+      @count += 1
+
       url = "http://www.amazon.com/dp/" + asin
       response = HTTParty.get(URI.encode(url))
       doc = Nokogiri::HTML(response)
@@ -45,7 +47,7 @@ class ScrapeActivity
         product.records.create( price: price )
       end
 
-      puts "Scraped: #{asin}: #{price}"
+      puts "#{@count} Scraped: #{asin}: #{price}"
     rescue => e
       puts "Error: #{e.message}"
     end
