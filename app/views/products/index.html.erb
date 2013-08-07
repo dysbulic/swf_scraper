@@ -11,8 +11,9 @@
   </thead>
 
   <tbody>
-    <% @products.each do |product| %>
+    <% @products.each_with_index do |product, index| %>
       <tr>
+        <td><%= index + 1 %></td>
         <td><%= product.asin %></td>
         <td><%= link_to 'Show', product %></td>
         <td><%= link_to 'Edit', edit_product_path(product) %></td>

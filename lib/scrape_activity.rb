@@ -27,8 +27,6 @@ class ScrapeActivity
 
 
   def scrape(asin)
-    puts "Scraping: #{asin}"    
-
     begin
       url = "http://www.amazon.com/dp/" + asin
       response = HTTParty.get(URI.encode(url))
