@@ -2,6 +2,7 @@ require "#{Rails.root}/app/helpers/application_helper"
 include ApplicationHelper
 
 require "#{ENV['GEM_HOME']}/gems/aws-flow-1.0.0/lib/aws/decider.rb"
+require "#{Rails.root}/config/initializers/swf.rb"
 require "#{Rails.root}/lib/scrape_activity.rb"
 require "#{Rails.root}/lib/scrape_workflow.rb"
 
