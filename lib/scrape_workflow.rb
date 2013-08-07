@@ -13,7 +13,6 @@
 # permissions and limitations under the License.
 ##
 
-require_relative './utils'
 require_relative 'scrape_activity'
 
 class ScrapeWorkflow
@@ -22,7 +21,7 @@ class ScrapeWorkflow
   workflow :queue_scrape do
     {
       :version => "1.0",
-      :task_list => $workflow_task_list,
+      :task_list => SWF_WORKFLOW_TASK_LIST,
       :execution_start_to_close_timeout => 120,
     }
   end
@@ -35,6 +34,3 @@ class ScrapeWorkflow
     # wait_for_all(scrape_future)
   end
 end
-
-worker = AWS::Flow::WorkflowWorker.new($swf.client, $domain, $workflow_task_list, ScrapeWorkflow)
-worker.start if __FILE__ == $0

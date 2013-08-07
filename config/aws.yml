@@ -1,8 +1,0 @@
-# AWS Credentials
-development:
-  access_key_id: AKIAINGASLMK7H22DS4Q
-  secret_access_key: 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
-
-production:
-  access_key_id: AKIAINGASLMK7H22DS4Q
-  secret_access_key: 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

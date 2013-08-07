@@ -13,15 +13,13 @@
 # permissions and limitations under the License.
 ##
 
-require_relative 'utils'
-
 class ScrapeActivity
   extend AWS::Flow::Activities
 
   activity :scrape  do
     {
       :version => "1.0",
-      :default_task_list => $activity_task_list,
+      :default_task_list => SWF_ACTIVITY_TASK_LIST,
       :default_task_schedule_to_start_timeout => 30,
       :default_task_start_to_close_timeout => 30,
     }
@@ -55,6 +53,3 @@ class ScrapeActivity
     end
   end
 end
-
-activity_worker = AWS::Flow::ActivityWorker.new($swf.client, $domain, $activity_task_list, ScrapeActivity) { {:use_forking => false} }
-activity_worker.start if __FILE__ == $0
